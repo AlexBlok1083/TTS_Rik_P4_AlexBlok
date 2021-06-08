@@ -99,6 +99,9 @@ namespace Zuul
 				case "quit":
 					wantToQuit = true;
 					break;
+				case "look":
+					Console.WriteLine(currentRoom.GetLongDescription());
+					break;
 			}
 
 			return wantToQuit;
