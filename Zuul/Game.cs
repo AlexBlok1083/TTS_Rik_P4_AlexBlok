@@ -21,6 +21,7 @@ namespace Zuul
 			Room pub = new Room("in the campus pub");
 			Room lab = new Room("in a computing lab");
 			Room office = new Room("in the computing admin office");
+			Room bar = new Room("in the bar above the pub");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -28,6 +29,9 @@ namespace Zuul
 			outside.AddExit("west", pub);
 
 			theatre.AddExit("west", outside);
+			theatre.AddExit("up", bar);
+
+			bar.AddExit("down", theatre);
 
 			pub.AddExit("east", outside);
 
