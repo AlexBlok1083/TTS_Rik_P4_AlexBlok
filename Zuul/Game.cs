@@ -5,12 +5,13 @@ namespace Zuul
 	public class Game
 	{
 		private Parser parser;
-		private Room currentRoom;
+		private Player player;
 
 		public Game ()
 		{
-			CreateRooms();
+			player = new Player();
 			parser = new Parser();
+			CreateRooms();
 		}
 
 		private void CreateRooms()
@@ -40,7 +41,7 @@ namespace Zuul
 
 			office.AddExit("west", lab);
 
-			currentRoom = outside;  // start game outside
+			player.CurrentRoom = outside;  // start game outside
 		}
 
 		/**
@@ -73,7 +74,7 @@ namespace Zuul
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(currentRoom.GetLongDescription());
+			Console.WriteLine(player.CurrentRoom.GetLongDescription());
 		}
 
 		/**
@@ -104,7 +105,7 @@ namespace Zuul
 					wantToQuit = true;
 					break;
 				case "look":
-					Console.WriteLine(currentRoom.GetLongDescription());
+					Console.WriteLine(player.CurrentRoom.GetLongDescription());
 					break;
 			}
 
@@ -142,7 +143,7 @@ namespace Zuul
 			string direction = command.GetSecondWord();
 
 			// Try to go to the next room.
-			Room nextRoom = currentRoom.GetExit(direction);
+			Room nextRoom = player.CurrentRoom.GetExit(direction);
 
 			if (nextRoom == null)
 			{
@@ -150,8 +151,8 @@ namespace Zuul
 			}
 			else
 			{
-				currentRoom = nextRoom;
-				Console.WriteLine(currentRoom.GetLongDescription());
+				player.CurrentRoom = nextRoom;
+				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}
 		}
 
