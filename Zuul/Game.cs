@@ -108,6 +108,7 @@ namespace Zuul
 					break;
 				case "go":
 					GoRoom(command);
+					player.Damage(10);
 					break;
 				case "quit":
 					wantToQuit = true;

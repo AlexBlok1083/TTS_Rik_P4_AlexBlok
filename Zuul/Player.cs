@@ -27,11 +27,7 @@ namespace Zuul
 
 		public bool IsAlive()
 		{
-			if (health <= 0)
-			{
-				return health > 0;
-			}
-			
+			return health > 0;
 		}
 
 	}
