@@ -56,8 +56,16 @@ namespace Zuul
 			bool finished = false;
 			while (!finished)
 			{
-				Command command = parser.GetCommand();
-				finished = ProcessCommand(command);
+				if (player.IsAlive())
+				{
+					Command command = parser.GetCommand();
+					finished = ProcessCommand(command);
+				}
+				else
+				{
+					finished = true;
+					Console.WriteLine("You died");
+				}
 			}
 			Console.WriteLine("Thank you for playing.");
 			Console.WriteLine("Press [Enter] to continue.");
