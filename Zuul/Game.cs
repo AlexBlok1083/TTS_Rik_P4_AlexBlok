@@ -114,7 +114,13 @@ namespace Zuul
 					wantToQuit = true;
 					break;
 				case "look":
-					Console.WriteLine(player.CurrentRoom.GetLongDescription());
+					look();
+					break;
+				case "status":
+					player.Status();
+					break;
+				case "inventory":
+					player.Inventory();
 					break;
 			}
 
@@ -163,6 +169,12 @@ namespace Zuul
 				player.CurrentRoom = nextRoom;
 				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}
+		}
+
+		private void look()
+		{
+			Console.WriteLine(player.CurrentRoom.GetLongDescription());
+			Console.WriteLine(player.CurrentRoom.Chest);
 		}
 
 	}

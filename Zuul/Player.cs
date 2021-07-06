@@ -8,11 +8,21 @@ namespace Zuul
 		private int health;
 		private Inventory inventory;
 
-		public Player() 
-		{ 
+		public Player()
+		{
 			CurrentRoom = null;
 			health = 100;
 			inventory = new Inventory(25);
+		}
+
+		public void Status()
+		{
+			Console.WriteLine("Health: " + health + "/100");
+		}
+
+		public void Inventory()
+		{
+			
 		}
 
 		public bool TakeFromChest(string itemName)
