@@ -6,6 +6,7 @@ namespace Zuul
 	{
 		private Parser parser;
 		private Player player;
+		private bool FinishGame = false;
 
 		public Game ()
 		{
@@ -23,6 +24,7 @@ namespace Zuul
 			Room lab = new Room("in a computing lab");
 			Room office = new Room("in the computing admin office");
 			Room bar = new Room("in the bar above the pub");
+			Room EndGame = new Room("This is the end of the game.");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -32,6 +34,7 @@ namespace Zuul
 			theatre.AddExit("west", outside);
 
 			bar.AddExit("down", pub);
+			bar.AddExit("east", EndGame);
 
 			pub.AddExit("up", bar);
 			pub.AddExit("east", outside);
@@ -43,7 +46,11 @@ namespace Zuul
 
 			player.CurrentRoom = outside;  // start game outside
 
-			bar.Chest.Put("medkit", new Item(5, "Opens door."));
+			bar.Chest.Put("medkit", new Item(5, "Heals 20."));
+			pub.Chest.Put("key", new Item(5, "Key naar bar"));
+
+			bar.LockDoor();
+			EndGame.FinishRoom = true;
 		}
 
 		/**
@@ -62,6 +69,11 @@ namespace Zuul
 				{
 					Command command = parser.GetCommand();
 					finished = ProcessCommand(command);
+					if (player.CurrentRoom.FinishRoom)
+					{
+						finished = true;
+						Console.WriteLine("You have finished the game.");
+					}
 				}
 				else
 				{
@@ -177,6 +189,11 @@ namespace Zuul
 			}
 			else
 			{
+				if (nextRoom.Locked)
+				{
+					Console.WriteLine("This door is locked. You need a key for this.");
+					return;
+				}
 				player.CurrentRoom = nextRoom;
 				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}

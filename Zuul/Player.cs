@@ -41,6 +41,14 @@ namespace Zuul
 				Console.WriteLine("You used your item and gained 20 more health.");
 				return "";
 			}
+			if (itemName == "key")
+			{
+				string exitstring = command.GetThirdWord();
+				Room next = CurrentRoom.GetExit(exitstring);
+				next.UnlockDoor();
+				Console.WriteLine("You used the key and opened the door.");
+				return "";
+			}
 			return "";
 		}
 
