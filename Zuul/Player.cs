@@ -25,6 +25,25 @@ namespace Zuul
 			Console.WriteLine(inventory.checkItemsInventory());
 		}
 
+		public string Use(Command command)
+		{
+			string itemName = command.GetSecondWord();
+			Item item = inventory.Get(itemName);
+
+			if (item == null)
+			{
+				Console.WriteLine("The item" + itemName + "is not in your inventory.");
+				return "";
+			}
+			if (itemName == "medkit")
+			{
+				Heal(20);
+				Console.WriteLine("You used your item and gained 20 more health.");
+				return "";
+			}
+			return "";
+		}
+
 		public bool TakeFromChest(string itemName)
 		{
 			Item item = CurrentRoom.Chest.Get(itemName);

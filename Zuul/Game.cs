@@ -43,7 +43,7 @@ namespace Zuul
 
 			player.CurrentRoom = outside;  // start game outside
 
-			bar.Chest.Put("key", new Item(5, "Opens door."));
+			bar.Chest.Put("medkit", new Item(5, "Opens door."));
 		}
 
 		/**
@@ -129,6 +129,9 @@ namespace Zuul
 					break;
 				case "drop":
 					Drop(command);
+					break;
+				case "use":
+					player.Use(command);
 					break;
 			}
 
