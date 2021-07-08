@@ -22,7 +22,7 @@ namespace Zuul
 
 		public void Inventory()
 		{
-			
+			Console.WriteLine(inventory.checkItemsInventory());
 		}
 
 		public bool TakeFromChest(string itemName)
@@ -30,18 +30,18 @@ namespace Zuul
 			Item item = CurrentRoom.Chest.Get(itemName);
 			if (item == null)
 			{
-				Console.WriteLine(item + " is not in this room.");
+				Console.WriteLine(itemName + " is not in this room.");
 				return false;
 			}
-
+			
 			if (inventory.Put(itemName, item))
 			{
-				Console.WriteLine(item + " is now in your inventory.");
+				Console.WriteLine(itemName + " is now in your inventory.");
 				return true;
 			}
 
 			CurrentRoom.Chest.Put(itemName, item);
-			Console.WriteLine(item + " you are encumered.");
+			Console.WriteLine("you are encumered.");
 			return false;
 		}
 
@@ -50,18 +50,18 @@ namespace Zuul
 			Item item = inventory.Get(itemName);
 			if (item == null)
 			{
-				Console.WriteLine(item + " is not in your inventory.");
+				Console.WriteLine(itemName + " is not in your inventory.");
 				return false;
 			}
 
 			if (CurrentRoom.Chest.Put(itemName, item))
 			{
-				Console.WriteLine(item + " is now in the chest.");
+				Console.WriteLine(itemName + " is now in the chest.");
 				return true;
 			}
 
 			inventory.Put(itemName, item);
-			Console.WriteLine(item + " does not fit in the room. The room is full.");
+			Console.WriteLine(itemName + " does not fit in the room. The room is full.");
 			return false;
 		}
 

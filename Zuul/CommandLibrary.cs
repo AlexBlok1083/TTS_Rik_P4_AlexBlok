@@ -20,6 +20,8 @@ namespace Zuul
 			validCommands.Add("look");
 			validCommands.Add("status");
 			validCommands.Add("inventory");
+			validCommands.Add("take");
+			validCommands.Add("drop");
 		}
 
 		/**

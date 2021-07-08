@@ -27,6 +27,7 @@ namespace Zuul
 			if (CurrentWeight() + item.Weight <= maxWeight)
 			{
 				items.Add(itemName, item);
+				return true;
 			}
 			return false;
 		}
@@ -40,6 +41,23 @@ namespace Zuul
 				return item;
 			}
 			return null;
+		}
+
+		public string checkItemsRoom()
+		{
+			foreach (KeyValuePair<string, Item> entry in items)
+			{
+				return ("Items in room: " + entry.Key);
+			}
+			return ("This room is empty");
+		}
+		public string checkItemsInventory()
+		{
+			foreach (KeyValuePair<string, Item> entry in items)
+			{
+				return ("Your inventory: " + entry.Key);
+			}
+			return ("Your inventory is empty");
 		}
 	}
 }

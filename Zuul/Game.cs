@@ -30,10 +30,10 @@ namespace Zuul
 			outside.AddExit("west", pub);
 
 			theatre.AddExit("west", outside);
-			theatre.AddExit("up", bar);
 
-			bar.AddExit("down", theatre);
+			bar.AddExit("down", pub);
 
+			pub.AddExit("up", bar);
 			pub.AddExit("east", outside);
 
 			lab.AddExit("north", outside);
@@ -42,6 +42,8 @@ namespace Zuul
 			office.AddExit("west", lab);
 
 			player.CurrentRoom = outside;  // start game outside
+
+			bar.Chest.Put("key", new Item(5, "Opens door."));
 		}
 
 		/**
@@ -122,6 +124,12 @@ namespace Zuul
 				case "inventory":
 					player.Inventory();
 					break;
+				case "take":
+					Take(command);
+					break;
+				case "drop":
+					Drop(command);
+					break;
 			}
 
 			return wantToQuit;
@@ -174,8 +182,22 @@ namespace Zuul
 		private void look()
 		{
 			Console.WriteLine(player.CurrentRoom.GetLongDescription());
-			Console.WriteLine(player.CurrentRoom.Chest);
+			Console.WriteLine(player.CurrentRoom.Chest.checkItemsRoom());
 		}
 
+		private void Take(Command command)
+		{
+			if ((command).HasSecondWord())
+			{
+				player.TakeFromChest(command.GetSecondWord());
+			}
+		}
+		private void Drop(Command command)
+		{
+			if ((command).HasSecondWord())
+			{
+				player.DropToChest(command.GetSecondWord());
+			}
+		}
 	}
 }
